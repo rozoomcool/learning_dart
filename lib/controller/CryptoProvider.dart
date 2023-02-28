@@ -23,7 +23,18 @@ class CryptoProvider extends ChangeNotifier {
   }
 
   Future<void> getSortedCryptoByUsd() async {
-    cryptoData = _service.FilterDataByUsd(cryptoData);
+    cryptoData = await _service.FilterDataByUsd();
     notifyListeners();
   }
+
+  Future<void> getSortedCryptoByEur() async {
+    cryptoData = await _service.FilterDataByEur();
+    notifyListeners();
+  }
+
+  Future<void> getSortedCryptoByBtc() async {
+    cryptoData = await _service.FilterDataByBtc();
+    notifyListeners();
+  }
+
 }

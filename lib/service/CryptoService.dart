@@ -32,8 +32,19 @@ class CryptoService{
     return cryptoModelData;
   }
 
-  List<CryptoModel> FilterDataByUsd(List<CryptoModel> data){
+  Future<List<CryptoModel>> FilterDataByUsd() async{
+    List<CryptoModel> data = await getCryptoModelData();
     return data.where((e) => e.currency.contains('USD')).toList();
+  }
+
+  Future<List<CryptoModel>> FilterDataByEur() async {
+    List<CryptoModel> data = await getCryptoModelData();
+    return data.where((e) => e.currency.contains('EUR')).toList();
+  }
+
+  Future<List<CryptoModel>> FilterDataByBtc() async {
+    List<CryptoModel> data = await getCryptoModelData();
+    return data.where((e) => e.currency.contains('BTC')).toList();
   }
 
 }

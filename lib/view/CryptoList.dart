@@ -18,10 +18,12 @@ class CryptoList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) =>
               _buildList(context, index));
     }else{
-      return const Padding(
-        padding: EdgeInsets.all(30),
-        child: LinearProgressIndicator(
-          minHeight: 20,
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.only(left: 30, right: 30),
+          child: LinearProgressIndicator(
+            minHeight: 20,
+          ),
         ),
       );
     }

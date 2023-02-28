@@ -1,4 +1,4 @@
-import 'package:crypto_viewer/controller/TrackerProvider.dart';
+import 'package:crypto_viewer/controller/CryptoProvider.dart';
 import 'package:crypto_viewer/view/CryptoList.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +15,15 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: CryptoList(),
+        child: Column(
+          children: [
+            Expanded(child: CryptoList()),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
-            Provider.of<TrackerProvider>(context, listen: false).trackCrypto(),
+            Provider.of<CryptoProvider>(context, listen: false).getSortedCryptoByUsd(),
         child: const Icon(Icons.refresh),
       ),
     );

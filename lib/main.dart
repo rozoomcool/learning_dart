@@ -1,4 +1,4 @@
-import 'package:crypto_viewer/controller/TrackerProvider.dart';
+import 'package:crypto_viewer/controller/CryptoProvider.dart';
 import 'package:crypto_viewer/view/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
         title: 'Crypto viewer',
         theme: ThemeData(primarySwatch: Colors.indigo),
         home: ChangeNotifierProvider(
-          create: (context) => TrackerProvider(),
+          create: (context) => CryptoProvider(),
           child: const SafeArea(child: HomePage()),
         ));
   }

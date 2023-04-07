@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notesboard/application/app.dart';
+import 'package:notesboard/widgets/node_widget.dart';
 import 'package:uuid/uuid.dart';
 
 import 'model/board_model.dart';
@@ -16,9 +17,11 @@ void main() async{
   Hive.registerAdapter<BoardModel>(BoardModelAdapter());
   Hive.registerAdapter<NodeModel>(NodeModelAdapter());
 
-  await Hive.openBox<List<BoardModel>>("boards");
-  await Hive.openBox<List<NodeModel>>("nodes");
+  var b = await Hive.openBox<List<BoardModel>>("boards");
+  var n = await Hive.openBox<List<NodeModel>>("nodes");
 
+  b.put('boards', List<BoardModel>.empty(growable: true));
+  n.put('nodes', List<NodeModel>.empty(growable: true));
 
   runApp(const MyApp());
 }

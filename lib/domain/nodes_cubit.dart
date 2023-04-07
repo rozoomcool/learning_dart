@@ -10,7 +10,7 @@ class NodesCubit extends Cubit<NodesState> {
   String boardId;
 
   NodesCubit(this.boardId) : super(NodesState.empty(boardId)) {
-    _myBox.put('nodes', List<NodeModel>.empty(growable: true));
+    // _myBox.put('nodes', List<NodeModel>.empty(growable: true));
   }
 
   void addNewNode(NodeModel model) {
@@ -19,7 +19,19 @@ class NodesCubit extends Cubit<NodesState> {
     emit(NodesState(boardId, nodes));
   }
 
-  void updateBoards() {
+  void updateOffset(String id, double x, double y) {
+    var current = state.nodes.where((element) => element.boardId == id).first;
+    current.x += x;
+    current.y += y;
+
+    var nodes = _myBox.get('nodes')!;
+    int index = nodes.indexWhere((element) => element.id == current.id);
+    nodes.insert(index, current);
+
+    emit(NodesState(boardId, nodes));
+  }
+
+  void updateNodes() {
     var nodes = _myBox.get('nodes')!;
     emit(NodesState(boardId, nodes));
   }
@@ -27,6 +39,6 @@ class NodesCubit extends Cubit<NodesState> {
   @override
   Future<void> close() async {
     super.close();
-    _myBox.close();
+    // _myBox.close();
   }
 }

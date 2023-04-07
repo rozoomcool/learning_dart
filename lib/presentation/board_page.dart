@@ -30,6 +30,7 @@ class BoardPage extends StatelessWidget {
           children: [
             const CanvasWidget(),
             Node(
+              key: UniqueKey(),
                 node: NodeModel(
                     id: 'fe',
                     title: "fefe",
@@ -37,13 +38,15 @@ class BoardPage extends StatelessWidget {
                     content: "fefe",
                     x: 0,
                     y: 0)),
-            ...nodeState.nodes.map((e) => GestureDetector(
-                  onPanUpdate: (details) {},
+            ...nodeState.nodes.map((e) => Draggable(
+                  onDragUpdate: (details) => context.read<NodesCubit>().updateOffset(e.id, details.delta.dx, details.delta.dy),
+                  feedback: Node(node: e),
+                  childWhenDragging: Container(),
                   child: Transform.translate(
-                    offset: Offset(e.x, e.y),
+                    offset: Offset(e.x + state.offsetX, e.y + state.offsetY),
                     child: Transform.scale(
                         scale: context.watch<TransformState>().scale,
-                        child: Node(node: e)),
+                        child: Node(key: UniqueKey(), node: e)),
                   ),
                 ))
           ],
@@ -53,7 +56,7 @@ class BoardPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () => showDialog(
               context: context,
-              builder: (context) => CreateNodeDialog(nodeState.boardId)),
+              builder: (context) => BlocProvider<NodesCubit>(create: (context) => NodesCubit(nodeState.boardId),child: BlocBuilder<NodesCubit, NodesState>(builder:(context, nodeState) => CreateNodeDialog(nodeState.boardId)))),
           child: const Icon(Icons.add),
         ),
       ),

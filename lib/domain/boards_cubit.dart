@@ -8,7 +8,7 @@ class BoardsCubit extends Cubit<BoardsState>{
   final Box<List<BoardModel>> _myBox = Hive.box('boards');
 
   BoardsCubit() : super(BoardsState.empty()){
-      _myBox.put('boards', List<BoardModel>.empty(growable: true));
+    // _myBox.put('boards', List<BoardModel>.empty(growable: true));
     updateBoards();
   }
 
@@ -27,6 +27,6 @@ class BoardsCubit extends Cubit<BoardsState>{
   @override
   Future<void> close() async {
     super.close();
-    _myBox.close();
+    // _myBox.close();
   }
 }

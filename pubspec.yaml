@@ -34,6 +34,7 @@ flutter:
     - assets/
     - assets/lotties/bezier-curve.json
     - assets/lotties/sea-walk.json
+    - assets/earth.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
